@@ -1,0 +1,31 @@
+version: '3'
+services:
+  # redis:
+  #   image: "redis:5"
+  #   container_name: redis
+  #   hostname: redis
+  #   volumes:
+  #     - ./docker-cache/redis:/data
+  #   ports:
+  #     - 6379:6379
+  mongo:
+    image: "mongo:4.2-bionic"
+    container_name: mongo
+    # entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    volumes:
+      - ./docker-cache/mongo:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_PASSWORD}
+  # postgre:
+  #   image: "postgres"
+  #   volumes:
+  #     - ./docker-cache/postgre:/var/lib/postgresql/data/
+  #   ports:
+  #    - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: Admin123
+  #     POSTGRES_DB: test_database
