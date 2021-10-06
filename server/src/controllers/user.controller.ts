@@ -4,19 +4,18 @@ export async function createUser({
   email,
   firstName,
   lastName,
-//   gender,
-//   address,
 }: any) {
   const user = await User.create({
     email,
-    // gender,
     firstName,
     lastName,
-    // address,
   });
 
   return user;
 }
+
+// import User from '../models/User'
+// import {Request, Response} from 'express'
 
 // import { prop, getModelForClass } from "@typegoose/typegoose";
 

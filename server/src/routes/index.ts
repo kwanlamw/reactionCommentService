@@ -12,7 +12,7 @@ export default ({ app }: TRoutesInput) => {
     });
 
     const comment = await createComment({
-      name: req.body.petName,
+      text: req.body.petName,
       owner: user._id,
     });
 
