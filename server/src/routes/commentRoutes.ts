@@ -1,9 +1,9 @@
-// import express from 'express';
+import express from 'express';
 // import { commentController } from '../app';
+import { createComment } from '../controllers/comment.Controller'
 
-// export const commentRoutes = express.Router();
+export const commentRoutes = express.Router();
 
 
-// commentRoutes.get('/', commentController.getcomment);
-// // commentRoutes.get('/label', commentController.getAllLabels);
-// // commentRoutes.post('/', commentController.createItem);
+// commentRoutes.get('/', comment.getComment);
+commentRoutes.post('/', createComment);
