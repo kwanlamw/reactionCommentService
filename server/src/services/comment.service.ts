@@ -1,8 +1,7 @@
-import { 
-  CreateQuery, FilterQuery , UpdateQuery } from "mongoose"; //
+import {  FilterQuery , UpdateQuery } from "mongoose"; 
 import CommentModel, { IComment } from "../models/comment.model";
 
-export function createComment(input: CreateQuery<IComment>) {
+export function createComment(input: FilterQuery<IComment>) {
   return CommentModel.create(input);
 }
 
