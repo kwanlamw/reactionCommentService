@@ -1,37 +1,59 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 import Comment from "../models/comment.model";
+import {
+  getComment,
+  addComment,
+  editComment,
+  removeComment,
+} from "../services/comment.service";
 
-export const createComment = async (req: Request, res: Response) => {
-  // req. ???
+export const getAll = async (req: Request, res: Response) => {
+  try {
+    const all = await getComment();
+    return res.json({ message: "success", all });
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).json({ message: "Error in getAll of controller" });
+  }
+};
 
-  // const comment = await Comment.create({
-  //   text,
-  //   owner,
-  // });
+export const addItem = async (req: Request, res: Response) => {
+  try {
+    const newData = req.body;
+    // const owner = req.user?.username as string;
+    if (newData) {
+      const text = await addComment(newData);
+      return res.json({ message: "success", text });
+    }
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).json({ message: "Error in addItem of controller" });
+  }
+};
 
-  // return comment;
+export const editItem = async (req: Request, res: Response) => {
+  try {
+    const updateData = req.body;
+    // const owner = req.user?.username as string;
+    if (updateData) {
+      const text = await editComment(updateData);
+      return res.json({ message: "success", text });
+    }
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).json({ message: "Error in editItem of controller" });
+  }
+};
 
-  res.json({ message:'success' })
-}
-
-// export class commentController {
-//   constructor (private Comment:commentService) {}
-
-//   addComment = async (req: any, res: any) => {
-
-//     try {
-//         // const userID = req.user?.id;
-//         // let listItems;
-//         // if (userID) {
-//         //     listItems = await this.commentService.getListItemsByUserID(req.user?.id as number);
-//         //     // may also need to include group ide 
-//         // }
-//         // // console.log("UserID",userID)
-//         // res.json({ listItems });
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).json({ message: "Error in addComment of controller" });
-//     }
-// };
-
-// }
+export const removeItem = async (req: Request, res: Response) => {
+  try {
+    const id = req.body;
+    if (id) {
+      const removeId = await removeComment(id);
+      return res.json({ message: "success", removeId });
+    }
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).json({ message: "Error in removeItem of controller" });
+  }
+};

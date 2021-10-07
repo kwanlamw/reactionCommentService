@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 // import cors from 'cors';
 // import routes from './routes';
 import connect from './connect';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = 5000;
@@ -22,13 +25,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    res.json({ message: 'test post' });
+    res.json({ message: 'test post ABC' });
 });
 
 app.listen(port, () => {
   console.log(`Timezones by location application is running on port ${port}.`);
 });
 
-const db = 'mongodb://localhost:27017/commentDB';
-connect({db});
+connect({
+  db: process.env.DB
+});
 // routes({  app });

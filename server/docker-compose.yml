@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: .
+    env_file:
+      - .env.production
     ports:
       - "5000:5000"
     links:
@@ -16,6 +18,7 @@ services:
   #     - 6379:6379
   mongo:
     image: "mongo:4.2-bionic"
+    restart: "always"
     container_name: mongo
     # entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
     volumes:

@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 
 type TInput = {
-  db: string;
+  db: string | undefined;
 }
 export default ({db}: TInput) => {
-  
+  if(!db) {
+    throw new Error('db string is undefined');
+  }
   const connect = () => {
     mongoose
       .connect(

@@ -1,10 +1,12 @@
-// import express from 'express';
+import express from "express";
+import {
+//   getAll,
+  addItem,
+  editItem,
+  removeItem,
+} from "../controllers/reaction.controller";
+export const reactionRoutes = express.Router();
 
-// // import { reactionController } from '../app';
-
-// export const reactionRoutes = express.Router();
-
-// reactionRoutes.post('/', reactionController);
-
-
-// import {createReaction} from '../controllers//reaction.controller';
+reactionRoutes.post("/", addItem);
+reactionRoutes.put("/:id", editItem);
+reactionRoutes.delete("/:id", removeItem);
