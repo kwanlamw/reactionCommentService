@@ -13,28 +13,63 @@ const user_controller_1 = require("../controllers/user.controller");
 const comment_controller_1 = require("../controllers/comment.controller");
 const reaction_controller_1 = require("../controllers/reaction.controller");
 exports.default = ({ app }) => {
-    app.post("/api/userComment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //get all the comment with reaction
+    app.get("/api/getAllCommentReaction", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = yield (0, user_controller_1.createUser)({
             email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
         });
         const comment = yield (0, comment_controller_1.createComment)({
-            text: req.body.petName,
+            text: req.body.text,
             owner: user._id,
         });
-        return res.send({ user, comment });
+        const reaction = yield (0, reaction_controller_1.createReaction)({
+            name: req.body.reactionName,
+            owner: user._id,
+        });
+        return res.send({ user, comment, reaction });
     }));
-    app.get("/api/userReaction", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //add comment
+    app.post("/api/editComment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = yield (0, user_controller_1.createUser)({
             email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
         });
-        const reaction = yield (0, reaction_controller_1.createReaction)({
-            name: req.body.petName,
+        const comment = yield (0, comment_controller_1.createComment)({
+            text: req.body.text,
             owner: user._id,
         });
-        return res.send({ user, reaction });
+        return res.send({ user, comment });
     }));
+    //edit comment
+    app.post("/api/addComment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const user = yield (0, user_controller_1.createUser)({
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+        });
+        const comment = yield (0, comment_controller_1.createComment)({
+            text: req.body.text,
+            owner: user._id,
+        });
+        return res.send({ user, comment });
+    }));
+    //remove comment
+    //add reaction
+    //edit reaction = change
+    //remove reaction
+    //   app.get("/api/getUserReaction", async (req: any, res: any) => {
+    //     const user = await createUser({
+    //         email: req.body.email,
+    //         firstName: req.body.firstName,
+    //         lastName: req.body.lastName,
+    //       });
+    //     const reaction = await addReaction({
+    //         name: req.body.reactionName,
+    //         owner: user._id,
+    //     });
+    //     return res.send({ user, reaction });
+    //   });
 };

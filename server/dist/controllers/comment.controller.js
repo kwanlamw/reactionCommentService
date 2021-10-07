@@ -24,3 +24,21 @@ function createComment({ text, owner, }) {
     });
 }
 exports.createComment = createComment;
+// export class commentController {
+//   constructor (private Comment:commentService) {}
+//   addComment = async (req: any, res: any) => {
+//     try {
+//         // const userID = req.user?.id;
+//         // let listItems;
+//         // if (userID) {
+//         //     listItems = await this.commentService.getListItemsByUserID(req.user?.id as number);
+//         //     // may also need to include group ide 
+//         // }
+//         // // console.log("UserID",userID)
+//         // res.json({ listItems });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).json({ message: "Error in addComment of controller" });
+//     }
+// };
+// }

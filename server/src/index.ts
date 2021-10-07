@@ -1,22 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+// import cors from 'cors';
 // import routes from './routes';
 import connect from './connect';
 
 const app = express();
-const port = 8080;
+const port = 5000;
 
-
+// app.use(cors());
+//body-parser config;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-// import Knex from 'knex';
-// const knexConfig = require('./knexfile');
-
-// const commentService = new CommentService(knex);
-// export const commentController = new CommentController(commentService);
-// const reactionService = new ReactionService(knex);
-// export const reactionController = new ReactionController(reactionService);
 
 // const API_VERSION = '/api/v1';
 import { routes } from './routes';

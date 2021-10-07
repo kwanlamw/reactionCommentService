@@ -17,12 +17,12 @@ export function removeComment(id: FilterQuery<IComment>) {
     return CommentModel.findByIdAndRemove(id);
   }
 
-  // 
+// 
 // const Article = require("../models/Article");
 
 // export class CommentService {
 //     // constructor (private)
-//     async getAllCommentReaction(){
+//     async getAll(){
 //         try {
 //             const allCommentReaction = await CommentModel.find();
 //             return allCommentReaction;
@@ -34,11 +34,11 @@ export function removeComment(id: FilterQuery<IComment>) {
 //     static async addComment(data){
 //         try {
 
-//             // const newComment = {
-//             //     title: data.title,
-//             //     body: data.body,
-//             //     article_image: data.article_image
-//             // }
+//             const newComment = {
+//                 title: data.title,
+//                 body: data.body,
+//                 article_image: data.article_image
+//             }
 //            const response = await new CommentModel(newComment).save();
 //            return response;
 //         } catch (error) {
@@ -55,7 +55,7 @@ export function removeComment(id: FilterQuery<IComment>) {
 //     //     }
 //     // }
 
-//     static async editComment(title, body, articleImage){
+//     async editComment(title, body, articleImage){
 //             try {
 //                 const editResponse =  await CommentModel.updateOne(
 //                     {title, body, articleImage}, 
@@ -68,7 +68,7 @@ export function removeComment(id: FilterQuery<IComment>) {
 //         }
 //     }
 
-//     static async removeComment(commentId: number){
+//     async removeComment(commentId: number){
 //         try {
 //             const removeResponse = await CommentModel.findByIdAndRemove(commentId);
 //             return removeResponse;

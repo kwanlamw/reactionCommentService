@@ -1,16 +1,17 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import Comment from "../models/comment.model";
 
-export async function createComment({
-text,
-owner,
-}: any) {
-  const comment = await Comment.create({
-    text,
-    owner,
-  });
+export const createComment = async (req: Request, res: Response) => {
+  // req. ???
 
-  return comment;
+  // const comment = await Comment.create({
+  //   text,
+  //   owner,
+  // });
+
+  // return comment;
+
+  res.json({ message:'success' })
 }
 
 // export class commentController {

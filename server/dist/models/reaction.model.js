@@ -22,6 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 // mongoose schema
 const ReactionSchema = new mongoose_1.Schema({
+    _id: mongoose_1.default.Schema.Types.ObjectId,
     name: { type: String, required: true },
     owner: { type: mongoose_1.Schema.Types.ObjectId, required: true }
 });
