@@ -11,10 +11,10 @@ export interface IReaction extends Document {
 // mongoose schema
 const ReactionSchema: Schema = new Schema({
   // _id: mongoose.Schema.Types.ObjectId,
-  // name: { type: String, required: true },
+  // name: String,
+  name: { type: String, required: true },
   // owner: { type: Schema.Types.ObjectId, required: true },
-  name: String,
-  owner: String,
+  owner: { type: String, required: true },
   commentId: String,
 });
 

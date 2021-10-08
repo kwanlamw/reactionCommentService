@@ -11,10 +11,10 @@ export interface IComment extends Document {
 const CommentSchema: Schema = new Schema(
   {
     // _id: mongoose.Schema.Types.ObjectId,
-    // text: { type: String, required: true },
-    text: String,
-    // owner: { type: String, required: true, ref: "Comment" },
-    owner: String,
+    text: { type: String, required: true },
+    // text: String,
+    owner: { type: String, required: true },
+    // owner: String,
   },
   {
     timestamps: true,
