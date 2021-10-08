@@ -4,7 +4,8 @@ import CommentModel, { IComment } from "../models/comment.model";
 // export function addComment(input: FilterQuery<IComment>) {
 //   return CommentModel.create(input);
 // }
-export async function addComment(newData:any) {
+
+export async function addComment(newData:any): Promise<IComment | undefined> {
   try {
     const newComment = {
       text: newData.body,
@@ -21,7 +22,7 @@ export async function addComment(newData:any) {
 // export function getComment(query: FilterQuery<IComment>) {
 //   return CommentModel.where(query);
 // }
-export async function getComment() {
+export async function getComment(): Promise<any> {
   try {
     const allCommentReaction = await CommentModel.find();
     // const allCommentReaction = await CommentModel.where();
@@ -34,7 +35,7 @@ export async function getComment() {
 // export function editComment(input: UpdateQuery<IComment>) {
 //   return CommentModel.findByIdAndUpdate(input);
 // }
-export async function editComment(updateData:any) {
+export async function editComment(updateData:any): Promise<any> {
   try {
     const editResponse = await CommentModel.findByIdAndUpdate( updateData );
     // const editResponse = await CommentModel.updateOne(
@@ -51,7 +52,7 @@ export async function editComment(updateData:any) {
 // export function removeComment(id: FilterQuery<IComment>) {
 //   return CommentModel.findByIdAndRemove(id);
 // }
-export async function removeComment(commentId: any) {
+export async function removeComment(commentId: any): Promise<any> {
   try {
     const removeResponse = await CommentModel.findByIdAndRemove(commentId);
     return removeResponse;

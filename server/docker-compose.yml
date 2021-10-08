@@ -1,4 +1,4 @@
-version: '3'
+version: "3.1"
 services:
   web:
     build: .
@@ -16,18 +16,19 @@ services:
   #     - ./docker-cache/redis:/data
   #   ports:
   #     - 6379:6379
-  mongo:
-    image: "mongo:4.2-bionic"
-    restart: "always"
-    container_name: mongo
-    # entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
-    volumes:
-      - ./docker-cache/mongo:/data/db
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_PASSWORD}
+  # mongo:
+  # image: "mongo"
+  # restart: "always"
+  # container_name: mongo
+  # entrypoint: ["/usr/bin/mongod", "--bind_ip_all"]
+  # entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+  # volumes:
+  # - ./docker-cache/mongo:/data/db
+  # ports:
+  #   - 27017:27017
+  # environment:
+  #   MONGO_INITDB_ROOT_USERNAME: root
+  #   MONGO_INITDB_ROOT_PASSWORD: example
   # postgre:
   #   image: "postgres"
   #   volumes:
@@ -38,3 +39,21 @@ services:
   #     POSTGRES_USER: root
   #     POSTGRES_PASSWORD: Admin123
   #     POSTGRES_DB: test_database
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker-cache/mongo:/data/db
+    env_file:
+      - .env.production
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    links:
+      - "mongo:mongo"
+    env_file:
+      - .env.production
