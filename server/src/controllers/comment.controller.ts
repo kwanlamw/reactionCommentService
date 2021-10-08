@@ -1,3 +1,4 @@
+import { ObjectId } from "bson";
 import express, { Request, Response } from "express";
 import Comment from "../models/comment.model";
 import {
@@ -33,10 +34,11 @@ export const addItem = async (req: Request, res: Response) => {
 
 export const editItem = async (req: Request, res: Response) => {
   try {
+    const updateId = req.params.id;
     const updateData = req.body;
     // const owner = req.user?.username as string;
-    if (updateData) {
-      const text = await editComment(updateData);
+    if (updateId && updateData) {
+      const text = await editComment(updateId, updateData);
       return res.json({ message: "success", text });
     }
   } catch (err: any) {
@@ -47,7 +49,7 @@ export const editItem = async (req: Request, res: Response) => {
 
 export const removeItem = async (req: Request, res: Response) => {
   try {
-    const id = req.body;
+    const id = req.params.id;
     if (id) {
       const removeId = await removeComment(id);
       return res.json({ message: "success", removeId });

@@ -7,14 +7,16 @@ import {
   removeReaction,
 } from "../services/reaction.service";
 
-
-
 export const addItem = async (req: Request, res: Response) => {
   try {
+    const commentId = "615ff99dde57ba2c58031743";
+    //req.params.id;
+    //"615fed536f300321fdc8ec75";
+    //ObjectId
     const newEmoji = req.body;
     // const owner = req.user?.username as string;
-    if (newEmoji) {
-      const reaction = await addReaction(newEmoji);
+    if (commentId && newEmoji) {
+      const reaction = await addReaction(commentId, newEmoji);
       // const reaction = await addReaction({newEmoji, owner});
       return res.json({ message: "success", reaction });
     }
@@ -26,10 +28,11 @@ export const addItem = async (req: Request, res: Response) => {
 
 export const editItem = async (req: Request, res: Response) => {
   try {
+    const updateId = req.params.id;
     const updateEmoji = req.body;
     // const owner = req.user?.username as string;
-    if (updateEmoji) {
-      const reaction = await editReaction(updateEmoji);
+    if (updateId && updateEmoji) {
+      const reaction = await editReaction(updateId, updateEmoji);
       // const reaction = await editReaction({updateEmoji,owner});
       return res.json({ message: "success", reaction });
     }
@@ -41,8 +44,9 @@ export const editItem = async (req: Request, res: Response) => {
 
 export const removeItem = async (req: Request, res: Response) => {
   try {
-    const id = req.body;
-      // const id = req.params.id;
+    const id = "615ffbf1b066e12e516d3236";
+    //ObjectId
+    //req.params.id;
     if (id) {
       const removeId = await removeReaction(id);
       return res.json({ message: "success", removeId });

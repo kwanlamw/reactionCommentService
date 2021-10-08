@@ -8,42 +8,12 @@ services:
       - "5000:5000"
     links:
       - "mongo:mongo"
-  # redis:
-  #   image: "redis:5"
-  #   container_name: redis
-  #   hostname: redis
-  #   volumes:
-  #     - ./docker-cache/redis:/data
-  #   ports:
-  #     - 6379:6379
-  # mongo:
-  # image: "mongo"
-  # restart: "always"
-  # container_name: mongo
-  # entrypoint: ["/usr/bin/mongod", "--bind_ip_all"]
-  # entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
-  # volumes:
-  # - ./docker-cache/mongo:/data/db
-  # ports:
-  #   - 27017:27017
-  # environment:
-  #   MONGO_INITDB_ROOT_USERNAME: root
-  #   MONGO_INITDB_ROOT_PASSWORD: example
-  # postgre:
-  #   image: "postgres"
-  #   volumes:
-  #     - ./docker-cache/postgre:/var/lib/postgresql/data/
-  #   ports:
-  #    - 5432:5432
-  #   environment:
-  #     POSTGRES_USER: root
-  #     POSTGRES_PASSWORD: Admin123
-  #     POSTGRES_DB: test_database
   mongo:
     image: mongo
     restart: always
     ports:
       - 27017:27017
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all"]
     volumes:
       - ./docker-cache/mongo:/data/db
     env_file:

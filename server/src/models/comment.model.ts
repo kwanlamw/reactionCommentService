@@ -13,7 +13,7 @@ const CommentSchema: Schema = new Schema(
     // _id: mongoose.Schema.Types.ObjectId,
     // text: { type: String, required: true },
     text: String,
-    // owner: { type: Schema.Types.ObjectId, required: true, ref: "Comment" },
+    // owner: { type: String, required: true, ref: "Comment" },
     owner: String,
   },
   {
