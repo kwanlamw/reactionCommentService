@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import CommentList from './components/CommentList';
+import React, { memo } from "react";
+// import logo from "./logo.svg";
+import "./App.css";
+import { Box, Grid } from "@mui/material";
+import { Comment, CommentList } from "./components";
 
 function App() {
+  // const [mode, setMode] = React.useState("");
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <CommentList/>
+      <Box margin={2}>
+        <Grid container justifyContent="space-around" alignItems="flex-start">
+          <Grid xs={"auto"}>
+            <Grid container alignItems="center">
+              {/* Input Area: */}
+              <Comment mode="add" main="" reply="" paperWidth={400} />
+            </Grid>
+          </Grid>
+
+          <Grid xs={8}>
+            {/* Record as below: */}
+            <CommentList list={undefined} />
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 }

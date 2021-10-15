@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import {
   ToggleButtonGroup,
   IconButton,
@@ -17,10 +17,56 @@ import { faSmile } from "@fortawesome/free-regular-svg-icons/faSmile"; //haha
 import { faFrown } from "@fortawesome/free-regular-svg-icons/faFrown"; //sad
 import { faAngry } from "@fortawesome/free-regular-svg-icons/faAngry"; //angry
 
-export default memo(function SplitButton(props) {
+export default memo(function Emoji(props) {
   const options = ["like", "love", "haha", "sad", "angry"];
   const icons = [faThumbsUp, faHeart, faSmile, faFrown, faAngry];
   const coloring = ["#0d47a1", "#f06292", "#009688", "#37474f", "#dd2c00"];
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const [emotion, setEmotion] = React.useState<string | any>(faPlus);
+
+  const handleEmotion = (
+    event: React.MouseEvent<HTMLElement>,
+    newEmotion: string | any
+  ) => {
+    // console.log(newEmotion);
+    if (newEmotion !== null) {
+      setEmotion(newEmotion);
+    } else {
+      setEmotion(faPlus);
+    }
+  };
+
+  const handleBadgeVisibility = () => {
+    setInvisible(!invisible);
+  };
+
+  useEffect(() => {
+    if (emotion !== faPlus) {
+      //   console.log(emotion.iconName);
+      icons.filter((icon: any): void => {
+        if (icon.iconName === emotion.iconName) {
+          //   return icons.indexOf(icon);
+          return setBadgeColor(coloring[icons.indexOf(icon)]);
+        }
+      });
+      //   setBadgeColor(coloring[Number(result)]);
+    }
+  }, [emotion, coloring, icons]);
 
   const [badgeColor, setBadgeColor] = React.useState("");
   const [count, setCount] = React.useState(1);
@@ -30,7 +76,7 @@ export default memo(function SplitButton(props) {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: rgba(0, 0, 0, 0.85);
+    color: ${badgeColor};
     font-size: 14px;
     font-variant: tabular-nums;
     list-style: none;
@@ -77,81 +123,12 @@ export default memo(function SplitButton(props) {
     }
   `;
 
-  //   const [open, setOpen] = React.useState(false);
-  //   const anchorRef = React.useRef<HTMLDivElement>(null);
-  //   const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  //   const handleClick = () => {
-  //     console.info(`You clicked ${options[selectedIndex]}`);
-  //   };
-
-  //   const handleMenuItemClick = (
-  //     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-  //     index: number
-  //   ) => {
-  //     setSelectedIndex(index);
-  //     setOpen(false);
-  //   };
-
-  //   const handleToggle = () => {
-  //     setOpen((prevOpen) => !prevOpen);
-  //   };
-
-  //   const handleClose = (event: Event) => {
-  //     if (
-  //       anchorRef.current &&
-  //       anchorRef.current.contains(event.target as HTMLElement)
-  //     ) {
-  //       return;
-  //     }
-
-  //     setOpen(false);
-  //   };
-
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
-  const [emotion, setEmotion] = React.useState<string | any>(faPlus);
-
-  const handleEmotion = (
-    event: React.MouseEvent<HTMLElement>,
-    newEmotion: string | any
-  ) => {
-    console.log(newEmotion);
-    if (newEmotion !== null) {
-      setEmotion(newEmotion);
-    } else {
-      setEmotion(faPlus);
-    }
-
-    setBadgeColor(newEmotion);
-  };
-
-  const handleBadgeVisibility = () => {
-    setInvisible(!invisible);
-  };
-
   return (
     <React.Fragment>
       <IconButton
-        aria-label="addEmoji"
+        aria-label="emoji"
         size="small"
-        aria-controls={open ? "split-button-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
         aria-describedby={id}
-        // variant="contained"
         onClick={handleClick}
       >
         <FontAwesomeIcon icon={emotion} color={badgeColor} />
@@ -171,33 +148,27 @@ export default memo(function SplitButton(props) {
         }}
       >
         <ToggleButtonGroup
-          //   color="warning"
           value={emotion}
           exclusive
           onChange={handleEmotion}
           aria-label="handleEmotion"
         >
           {options.map((option, index) => (
-            <ToggleButton
-              //   className="MenuItem"
-              value={icons[index]}
-              aria-label={option}
-              //   color={coloring[index]}
-            >
-              {/* <StyledBadge
+            <ToggleButton value={icons[index]} key={index} aria-label={option}>
+              <StyledBadge
                 overlap="circular"
                 badgeContent={count}
                 anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "right",
                 }}
-              > */}
-              <FontAwesomeIcon
-                key={option}
-                icon={icons[index]}
-                color={coloring[index]}
-              />
-              {/* </StyledBadge> */}
+              >
+                <FontAwesomeIcon
+                  key={option}
+                  icon={icons[index]}
+                  color={coloring[index]}
+                />
+              </StyledBadge>
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
