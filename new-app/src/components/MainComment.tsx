@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Emoji } from "../components";
+import { Emoji, ReplyList } from ".";
 import {
   Paper,
   InputBase,
@@ -13,16 +13,16 @@ import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
 import ReplyIcon from "@mui/icons-material/Reply";
 
-interface ICommentProps {
+interface MainCommentProps {
   mode: string | null;
   // index: any;
   // user:any;
   main: string;
-  // reply?: any; //array
+  reply?: any; //array
   paperWidth: number;
 }
 
-const Comment: React.FC<ICommentProps> = (props) => {
+const Comment: React.FC<MainCommentProps> = (props) => {
   // const [mode, setMode] = React.useState(props.mode);
   // const [reply, setReply] = React.useState(1);
 
@@ -33,7 +33,10 @@ const Comment: React.FC<ICommentProps> = (props) => {
   // }, [props.mode, setMode]);
 
   const replyFunction = () => {
-    alert("need to add reply comment area");
+    console.log(props.reply);
+    props.reply.splice(0, 0, {});
+    console.log(props.reply);
+    // alert("need to add reply comment area");
   };
   const randomColor = () => {
     console.log(typeof colors);
@@ -49,13 +52,14 @@ const Comment: React.FC<ICommentProps> = (props) => {
         display: "flex",
         // flexDirection: "column",
         alignItems: "center",
-        minWidth: props.paperWidth || 200,
+        // justifyContent: "center",
+        minWidth: props.paperWidth || 300,
       }}
     >
       <Grid container direction="column">
-        <Grid container direction="row" id="reply" alignItems="center">
+        <Grid container direction="row" id="main" alignItems="center">
           <Avatar
-            sx={{ width: 14, height: 14, bgcolor: colors.blueGrey[500] }}
+            sx={{ width: 28, height: 28, bgcolor: colors.deepOrange[500] }}
             alt="User"
             src="/broken-image.jpg"
             // variant="rounded"
@@ -63,7 +67,7 @@ const Comment: React.FC<ICommentProps> = (props) => {
             a
           </Avatar>
           <Divider
-            sx={{ height: 14, m: 0.5, p: "2px" }}
+            sx={{ height: 28, m: 0.5, p: "2px" }}
             orientation="vertical"
           />
 
@@ -82,7 +86,7 @@ const Comment: React.FC<ICommentProps> = (props) => {
           {props.mode && (
             <IconButton
               // color="secondary"
-              sx={{ p: "5px" }}
+              sx={{ p: "10px" }}
               aria-label="send"
               type="submit"
             >
@@ -92,7 +96,7 @@ const Comment: React.FC<ICommentProps> = (props) => {
           {props.mode !== "add" && (
             <IconButton
               // color="secondary"
-              sx={{ p: "5px" }}
+              sx={{ p: "10px" }}
               aria-label="reply"
               // type="submit"
               onClick={replyFunction}
@@ -101,6 +105,11 @@ const Comment: React.FC<ICommentProps> = (props) => {
             </IconButton>
           )}
         </Grid>
+        {
+          <Grid container direction="row" id="reply">
+            {props.reply && <ReplyList list={props.reply} />}
+          </Grid>
+        }
       </Grid>
     </Paper>
   );

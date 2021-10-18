@@ -3,9 +3,17 @@ import React, { memo } from "react";
 import "./App.css";
 import { Box, Grid } from "@mui/material";
 import { Comment, CommentList } from "./components";
+import { useSelector, useDispatch } from "react-redux";
+import { IRootState } from "./redux/store";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
-  // const [mode, setMode] = React.useState("");
+  const dispatch = useDispatch();
+  // const isAuthenticated = useSelector(
+  //   (state: IRootState) => state.auth.isAuthenticated
+  // );
+  // console.log(isAuthenticated);
+
   return (
     <div className="App">
       <Box margin={2}>
@@ -13,7 +21,7 @@ function App() {
           <Grid xs={"auto"}>
             <Grid container alignItems="center">
               {/* Input Area: */}
-              <Comment mode="add" main="" reply="" paperWidth={400} />
+              <Comment mode="add" main="" paperWidth={400} />
             </Grid>
           </Grid>
 

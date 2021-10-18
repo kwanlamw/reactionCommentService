@@ -1,9 +1,18 @@
 import React, { memo } from "react";
 import { Grid } from "@mui/material";
-import Comment from "./Comment";
+import MainComment from "./MainComment";
 
 const list = [
-  { main: "1", reply: "2" },
+  {
+    main: "1",
+    reply: [
+      { main: "a" },
+      { main: "b" },
+      { main: "c" },
+      { main: "d" },
+      { main: "e" },
+    ],
+  },
   { main: "2", reply: "2" },
   { main: "1", reply: "1" },
   { main: "2", reply: "2" },
@@ -22,11 +31,11 @@ const CommentList: React.FC<CommentListProps> = (props) => {
     <Grid container direction="row" spacing={2}>
       {list.map((item, index) => (
         <Grid item xs={8} key={index}>
-          <Comment
+          <MainComment
             mode={null}
             main={item.main}
             reply={item.reply}
-            paperWidth={500}
+            paperWidth={400}
           />
         </Grid>
       ))}
