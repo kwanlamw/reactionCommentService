@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Emoji } from "../components";
+import { Emoji } from ".";
 import {
   Paper,
   InputBase,
@@ -13,16 +13,16 @@ import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
 import ReplyIcon from "@mui/icons-material/Reply";
 
-interface ICommentProps {
+interface CommentProps {
   mode: string | null;
   // index: any;
   // user:any;
-  main: string;
-  // reply?: any; //array
+  content: string;
+  reply?: Array<CommentProps>;
   paperWidth: number;
 }
 
-const Comment: React.FC<ICommentProps> = (props) => {
+const Comment: React.FC<CommentProps> = (props) => {
   // const [mode, setMode] = React.useState(props.mode);
   // const [reply, setReply] = React.useState(1);
 
@@ -33,11 +33,17 @@ const Comment: React.FC<ICommentProps> = (props) => {
   // }, [props.mode, setMode]);
 
   const replyFunction = () => {
-    alert("need to add reply comment area");
+    if (props.reply) {
+      console.log(props.reply);
+      // props.reply.splice(0, 0, [{ content: "" }]);
+      console.log(props.reply);
+    }
+    // alert("need to add reply comment area");
   };
-  const randomColor = () => {
-    console.log(typeof colors);
-  };
+  // const randomColor = () => {
+  //   console.log(colors);
+  //   console.log(typeof colors);
+  // };
 
   // randomColor(10, 20);
 
@@ -45,44 +51,43 @@ const Comment: React.FC<ICommentProps> = (props) => {
     <Paper
       component="form"
       sx={{
-        p: "4px",
+        p: "0px 2px",
         display: "flex",
-        // flexDirection: "column",
         alignItems: "center",
-        minWidth: props.paperWidth || 200,
+        minWidth: props.paperWidth || 400,
       }}
     >
-      <Grid container direction="column">
-        <Grid container direction="row" id="reply" alignItems="center">
+      <Grid container flexDirection="column">
+        <Grid container flexDirection="row" id="main">
           <Avatar
-            sx={{ width: 14, height: 14, bgcolor: colors.blueGrey[500] }}
+            sx={{
+              m: "6px 2px",
+              p: "4px",
+              width: 20,
+              height: 20,
+              bgcolor: colors.deepOrange[500],
+            }}
             alt="User"
             src="/broken-image.jpg"
             // variant="rounded"
           >
             a
           </Avatar>
-          <Divider
-            sx={{ height: 14, m: 0.5, p: "2px" }}
-            orientation="vertical"
-          />
-
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
           <Emoji />
-
           <InputBase
-            readOnly={!props.mode}
             sx={{ ml: 1, flex: 1 }}
+            readOnly={!props.mode}
             placeholder="Feel free to leave us comment here..."
             inputProps={{ "aria-label": "comment" }}
             // value={props.value}
-            defaultValue={props.main}
+            defaultValue={props.content}
             multiline
           />
-
           {props.mode && (
             <IconButton
               // color="secondary"
-              sx={{ p: "5px" }}
+              sx={{ p: "10px" }}
               aria-label="send"
               type="submit"
             >
@@ -92,7 +97,7 @@ const Comment: React.FC<ICommentProps> = (props) => {
           {props.mode !== "add" && (
             <IconButton
               // color="secondary"
-              sx={{ p: "5px" }}
+              sx={{ p: "10px" }}
               aria-label="reply"
               // type="submit"
               onClick={replyFunction}
@@ -101,6 +106,25 @@ const Comment: React.FC<ICommentProps> = (props) => {
             </IconButton>
           )}
         </Grid>
+        {props.reply && (
+          <Grid
+            container
+            flexDirection="row"
+            justifyContent="flex-end"
+            id="reply"
+          >
+            {props.reply?.map((item, index) => (
+              <Grid item xs={8} key={index} p="1px">
+                <Comment
+                  mode={item.mode}
+                  content={item.content}
+                  reply={item.reply}
+                  paperWidth={200}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Grid>
     </Paper>
   );

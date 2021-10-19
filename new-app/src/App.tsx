@@ -14,6 +14,69 @@ function App() {
   // );
   // console.log(isAuthenticated);
 
+  const test = [
+    {
+      content: "1",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "2",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "1",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "2",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "1",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "2",
+      reply: [
+        { content: "a" },
+        { content: "b" },
+        { content: "c" },
+        { content: "d" },
+        { content: "e" },
+      ],
+    },
+  ];
+
   return (
     <div className="App">
       <Box margin={2}>
@@ -21,13 +84,13 @@ function App() {
           <Grid xs={"auto"}>
             <Grid container alignItems="center">
               {/* Input Area: */}
-              <Comment mode="add" main="" paperWidth={400} />
+              <Comment mode="add" content="" reply={[]} paperWidth={500} />
             </Grid>
           </Grid>
 
           <Grid xs={8}>
             {/* Record as below: */}
-            <CommentList list={undefined} />
+            <CommentList list={test} />
           </Grid>
         </Grid>
       </Box>
@@ -35,4 +98,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);
