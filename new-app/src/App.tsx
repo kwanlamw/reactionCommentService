@@ -3,9 +3,9 @@ import React, { memo } from "react";
 import "./App.css";
 import { Box, Grid } from "@mui/material";
 import { Comment, CommentList } from "./components";
-// import { useSelector, useDispatch } from "react-redux";
-// import { IRootState } from "./redux/store";
-// import { Switch, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { IRootState } from "./redux/store";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   // const dispatch = useDispatch();
@@ -20,7 +20,27 @@ function App() {
       reply: [
         { content: "a" },
         { content: "b" },
-        { content: "c" },
+        // { content: "c" },
+        // { content: "d" },
+        // { content: "e" },
+      ],
+    },
+    {
+      content: "2",
+      reply: [
+        { content: "a" },
+        // { content: "b" },
+        // { content: "c" },
+        // { content: "d" },
+        { content: "e" },
+      ],
+    },
+    {
+      content: "1",
+      reply: [
+        { content: "a" },
+        // { content: "b" },
+        // { content: "c" },
         { content: "d" },
         { content: "e" },
       ],
@@ -28,7 +48,7 @@ function App() {
     {
       content: "2",
       reply: [
-        { content: "a" },
+        // { content: "a" },
         { content: "b" },
         { content: "c" },
         { content: "d" },
@@ -39,9 +59,9 @@ function App() {
       content: "1",
       reply: [
         { content: "a" },
-        { content: "b" },
-        { content: "c" },
-        { content: "d" },
+        // { content: "b" },
+        // { content: "c" },
+        // { content: "d" },
         { content: "e" },
       ],
     },
@@ -49,30 +69,10 @@ function App() {
       content: "2",
       reply: [
         { content: "a" },
-        { content: "b" },
-        { content: "c" },
-        { content: "d" },
-        { content: "e" },
-      ],
-    },
-    {
-      content: "1",
-      reply: [
-        { content: "a" },
-        { content: "b" },
-        { content: "c" },
-        { content: "d" },
-        { content: "e" },
-      ],
-    },
-    {
-      content: "2",
-      reply: [
-        { content: "a" },
-        { content: "b" },
-        { content: "c" },
-        { content: "d" },
-        { content: "e" },
+        // { content: "b" },
+        // { content: "c" },
+        // { content: "d" },
+        // { content: "e" },
       ],
     },
   ];
@@ -84,7 +84,7 @@ function App() {
           <Grid xs={"auto"}>
             <Grid container alignItems="center">
               {/* Input Area: */}
-              <Comment mode="add" content="" reply={[]} paperWidth={500} />
+              <Comment mode="add" content="" reply={[]} paperWidth={400} />
             </Grid>
           </Grid>
 

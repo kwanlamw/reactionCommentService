@@ -38,14 +38,22 @@ const Comment: React.FC<CommentProps> = (props) => {
       // props.reply.splice(0, 0, [{ content: "" }]);
       console.log(props.reply);
     }
-    // alert("need to add reply comment area");
+    alert("need to add reply comment area");
   };
-  // const randomColor = () => {
-  //   console.log(colors);
-  //   console.log(typeof colors);
-  // };
 
-  // randomColor(10, 20);
+  const randomColor = () => {
+    const anyColors = colors as any;
+    const colorOpts = Object.keys(anyColors);
+    const randomKey = Math.floor(Math.random() * colorOpts.length);
+    const randomColorTheme = colorOpts[randomKey]; //     _.shuffle(Object.keys(anyColors))[0];
+    const colorKeys = Object.keys(anyColors[randomColorTheme]);
+    const randomKey2 = Math.floor(Math.random() * colorKeys.length);
+    const randomColorCode = colorKeys[randomKey2];
+
+    return anyColors[randomColorTheme][randomColorCode];
+  };
+
+  // randomColor();
 
   return (
     <Paper
@@ -54,7 +62,7 @@ const Comment: React.FC<CommentProps> = (props) => {
         p: "0px 2px",
         display: "flex",
         alignItems: "center",
-        minWidth: props.paperWidth || 400,
+        minWidth: props.paperWidth || 300,
       }}
     >
       <Grid container flexDirection="column">
@@ -65,7 +73,7 @@ const Comment: React.FC<CommentProps> = (props) => {
               p: "4px",
               width: 20,
               height: 20,
-              bgcolor: colors.deepOrange[500],
+              bgcolor: randomColor(),
             }}
             alt="User"
             src="/broken-image.jpg"
@@ -111,15 +119,16 @@ const Comment: React.FC<CommentProps> = (props) => {
             container
             flexDirection="row"
             justifyContent="flex-end"
-            id="reply"
+            // id="reply"
           >
             {props.reply?.map((item, index) => (
-              <Grid item xs={8} key={index} p="1px">
+              <Grid item xs={8} key={index} p="1px" id="reply">
                 <Comment
                   mode={item.mode}
                   content={item.content}
                   reply={item.reply}
                   paperWidth={200}
+                  // bgcolor={colors.blueGrey[500]}
                 />
               </Grid>
             ))}
