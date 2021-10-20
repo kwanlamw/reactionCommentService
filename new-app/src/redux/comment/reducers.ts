@@ -27,7 +27,7 @@ export const commentReducers = (
     case UPDATE_COMMENT_SUCCESS:
       const listComment2 = state.listComment.slice();
       // console.log("action.idx", action.idx);
-      listComment2[action.idx].main = action.main;
+      listComment2[action.idx].content = action.content;
       return {
         ...state,
         isProcessing: false,

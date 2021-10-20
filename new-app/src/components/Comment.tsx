@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import React, { memo } from "react";
 import { Emoji } from ".";
 import {
@@ -19,27 +20,52 @@ interface CommentProps {
   // user:any;
   content: string;
   reply?: Array<CommentProps>;
-  paperWidth: number;
+  paperWidth?: number;
 }
 
 const Comment: React.FC<CommentProps> = (props) => {
   // const [mode, setMode] = React.useState(props.mode);
-  // const [reply, setReply] = React.useState(1);
+  const [updateReply, setUpdateReply] = React.useState(
+    !_.isUndefined(props.reply) ? props.reply : []
+  );
+  // console.log(updateReply);
+  const [value, setValue] = React.useState(props.content);
+  const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
 
-  // React.useEffect(() => {
-  //   if (props.mode) {
-  //     setMode(mode);
-  //   }
-  // }, [props.mode, setMode]);
+  const submitFunction = () => {
+    console.log(props.content);
+    console.log(value);
+    if ((props.mode = "add")) {
+      //add content -> pass the value
+      alert("create success");
+    } else {
+      //edit content -> pass the value
+      alert("edit success");
+    }
+  };
 
   const replyFunction = () => {
-    if (props.reply) {
-      console.log(props.reply);
-      // props.reply.splice(0, 0, [{ content: "" }]);
-      console.log(props.reply);
+    console.log(props.reply);
+    console.log(updateReply);
+    //create add an new <Comment /> in the array
+    if (updateReply) {
+      // console.log(props.reply);
+
+      //unshift??
+      // setUpdateReply(updateReply.unshift({ mode: "add", content: "" }));
+      setUpdateReply(updateReply.splice(0, 0, { mode: "add", content: "" }));
+      // console.log(updateReply);
     }
-    alert("need to add reply comment area");
+    // alert("need to add reply comment area");
   };
+
+  // React.useEffect(() => {
+  //   if (updateReply) {
+  //     setUpdateReply(updateReply);
+  //   }
+  // }, [updateReply]);
 
   const randomColor = () => {
     const anyColors = colors as any;
@@ -88,9 +114,9 @@ const Comment: React.FC<CommentProps> = (props) => {
             readOnly={!props.mode}
             placeholder="Feel free to leave us comment here..."
             inputProps={{ "aria-label": "comment" }}
-            // value={props.value}
-            defaultValue={props.content}
+            value={value}
             multiline
+            onChange={handleValueChange}
           />
           {props.mode && (
             <IconButton
@@ -98,6 +124,7 @@ const Comment: React.FC<CommentProps> = (props) => {
               sx={{ p: "10px" }}
               aria-label="send"
               type="submit"
+              onClick={submitFunction}
             >
               {props.mode === "add" ? <SendIcon /> : <EditIcon />}
             </IconButton>
@@ -128,7 +155,6 @@ const Comment: React.FC<CommentProps> = (props) => {
                   content={item.content}
                   reply={item.reply}
                   paperWidth={200}
-                  // bgcolor={colors.blueGrey[500]}
                 />
               </Grid>
             ))}

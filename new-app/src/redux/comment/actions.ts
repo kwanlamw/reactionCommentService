@@ -19,7 +19,7 @@ interface ISetListComment {
 interface IUpdateCommentSuccess {
   type: typeof UPDATE_COMMENT_SUCCESS;
   idx: number;
-  main: string;
+  content: string;
 }
 
 interface IUpdateCommentFail {
@@ -44,12 +44,12 @@ export const setListComment = (
 export const updateCommentSuccess = (
   idx: number,
   // quantity: number
-  main: string
+  content: string
 ): IUpdateCommentSuccess => {
   return {
     type: UPDATE_COMMENT_SUCCESS,
     idx,
-    main,
+    content,
   };
 };
 

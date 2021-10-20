@@ -19,7 +19,9 @@ import { faAngry } from "@fortawesome/free-regular-svg-icons/faAngry"; //angry
 
 export default memo(function Emoji(props) {
   const options = ["like", "love", "haha", "sad", "angry"];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const icons = [faThumbsUp, faHeart, faSmile, faFrown, faAngry];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const coloring = ["#0d47a1", "#f06292", "#009688", "#37474f", "#dd2c00"];
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -51,32 +53,32 @@ export default memo(function Emoji(props) {
     }
   };
 
-  const handleBadgeVisibility = () => {
-    setInvisible(!invisible);
-  };
+  // const handleBadgeVisibility = () => {
+  //   setInvisible(!invisible);
+  // };
 
-  useEffect(() => {
-    if (emotion !== faPlus) {
-      //   console.log(emotion.iconName);
-      icons.filter((icon: any): void => {
-        if (icon.iconName === emotion.iconName) {
-          //   return icons.indexOf(icon);
-          return setBadgeColor(coloring[icons.indexOf(icon)]);
-        }
-      });
-      //   setBadgeColor(coloring[Number(result)]);
-    }
-  }, [emotion, coloring, icons]);
+  // React.useEffect(() => {
+  //   if (emotion !== faPlus) {
+  //     //   console.log(emotion.iconName);
+  //     icons.filter((icon: any): void => {
+  //       if (icon.iconName === emotion.iconName) {
+  //         //   return icons.indexOf(icon);
+  //         return setBadgeColor(coloring[icons.indexOf(icon)]);
+  //       }
+  //     });
+  //     //   setBadgeColor(coloring[Number(result)]);
+  //   }
+  // }, [emotion, coloring, icons]);
 
   const [badgeColor, setBadgeColor] = React.useState("");
   const [count, setCount] = React.useState(1);
-  const [invisible, setInvisible] = React.useState(false);
+  // const [invisible, setInvisible] = React.useState(false);
 
   const StyledBadge = styled(BadgeUnstyled)`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: ${badgeColor};
+    // color: ${badgeColor};
     font-size: 14px;
     font-variant: tabular-nums;
     list-style: none;
@@ -92,15 +94,15 @@ export default memo(function Emoji(props) {
       z-index: auto;
       min-width: 20px;
       height: 20px;
-      color: #fff;
+      // color: ${badgeColor};
       font-weight: 400;
       font-size: 12px;
 
       white-space: nowrap;
       text-align: center;
-      background: #ff4d4f;
-      border-radius: 10px;
-      box-shadow: 0 0 0 1px #fff;
+      // background: #fff;
+      // border-radius: 10px;
+      //box-shadow: 0 0 0 1px #fff;
     }
 
     & .MuiBadge-dot {

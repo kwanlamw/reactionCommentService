@@ -24,6 +24,7 @@ export interface IRootState {
   // auth: IAuthState;
   comment: ICommentState;
   //   emoji: IEmojiState;
+  // rounter: RouterState;
 }
 
 // // Step 2: IRootAction
